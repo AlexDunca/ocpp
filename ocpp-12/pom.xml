@@ -6,8 +6,8 @@
         <artifactId>ocpp-parent_2.10</artifactId>
         <version>4.2.6-SNAPSHOT</version>
     </parent>
-    <artifactId>ocpp-1.2_2.10</artifactId>
-    <name>ocpp-1.2</name>
+    <artifactId>ocpp-12_2.10</artifactId>
+    <name>ocpp-12</name>
     <dependencies>
         <dependency>
             <groupId>net.databinder.dispatch</groupId>

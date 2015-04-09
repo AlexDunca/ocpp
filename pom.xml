@@ -26,8 +26,8 @@
         <tag>HEAD</tag>
     </scm>
     <modules>
-        <module>ocpp-1.2</module>
-        <module>ocpp-1.5</module>
+        <module>ocpp-12</module>
+        <module>ocpp-15</module>
         <module>ocpp-soap</module>
         <module>ocpp-spray</module>
         <module>ocpp-messages</module>
@@ -46,12 +46,12 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>ocpp-1.2_${scala.version}</artifactId>
+                <artifactId>ocpp-12_${scala.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>ocpp-1.5_${scala.version}</artifactId>
+                <artifactId>ocpp-15_${scala.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

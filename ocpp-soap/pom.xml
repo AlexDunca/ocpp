@@ -11,11 +11,11 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ocpp-1.2_${scala.version}</artifactId>
+            <artifactId>ocpp-12_${scala.version}</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ocpp-1.5_${scala.version}</artifactId>
+            <artifactId>ocpp-15_${scala.version}</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
