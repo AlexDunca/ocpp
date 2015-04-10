@@ -27,6 +27,8 @@ def module(name: String) = Project(name, file(name))
     // -Ywarn-unused-import is not supported in 2.10
     scalacOptions := scalacOptions.value.filterNot(_ == "-Ywarn-unused-import"),
 
+    organization := "com.thenewmotion.ocpp",
+
     libraryDependencies += specs2)
 
 def scalaxbModule(name: String, packageNameForGeneratedCode: String) =
