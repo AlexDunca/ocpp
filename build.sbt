@@ -19,26 +19,23 @@ val sprayExt = "com.thenewmotion" %% "spray-ext" % "0.1.2"
 val specs2 = "org.specs2" %% "specs2" % specs2V % "test"
 
 
-val basicSettings = Seq(scalaVersion := "2.10.4",
-                        // -Ywarn-unused-import is not supported in 2.10
-                        scalacOptions := Seq(
-                              "-encoding", "UTF-8",
-                              "-unchecked",
-                              "-deprecation",
-                              "-feature",
-                              "-Xlog-reflective-calls"),
-                        libraryDependencies += specs2)
-
 def module(name: String) = Project(name, file(name))
-                             .enablePlugins(OssLibPlugin)
-                             .settings(basicSettings)
-                             .settings(aether.Aether.aetherPublishSettings)
+  .enablePlugins(OssLibPlugin)
+  .settings(
+    scalaVersion := tnm.ScalaVersion.prev,
+
+    // -Ywarn-unused-import is not supported in 2.10
+    scalacOptions := scalacOptions.value.filterNot(_ == "-Ywarn-unused-import"),
+
+    libraryDependencies += specs2)
 
 def scalaxbModule(name: String, packageNameForGeneratedCode: String) =
   module(name)
-   .settings(libraryDependencies += dispatch)
-   .settings(scalaxbSettings: _*)
    .settings(
+     scalaxbSettings,
+
+     libraryDependencies += dispatch,
+
      sourceGenerators in Compile += (scalaxb in Compile).taskValue,
      dispatchVersion in (Compile, scalaxb) := dispatchV,
      packageName in (Compile, scalaxb)     := packageNameForGeneratedCode)
@@ -56,4 +53,5 @@ val ocppSpray = module("ocpp-spray")
                   .dependsOn(ocppSoap)
                   .settings(libraryDependencies ++= List(sprayHttp, sprayHttpX, sprayExt))
 
+enablePlugins(OssLibPlugin)
 publish := {}
