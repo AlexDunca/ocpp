@@ -1,14 +1,17 @@
 package com.thenewmotion.example
 
 import java.net.URI
-import com.typesafe.scalalogging.slf4j.Logging
+import org.slf4j.LoggerFactory
 import com.thenewmotion.ocpp.messages._
 import scala.concurrent._
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.thenewmotion.ocpp.json.{OcppError, PayloadErrorCode, OcppException, OcppJsonClient}
 
 object JsonClientTestApp extends App {
-  val connection = new OcppJsonClient("Test Charger", new URI("http://localhost:8080/ocppws")) with Logging {
+
+  private[this] val logger = LoggerFactory.getLogger(JsonClientTestApp.getClass)
+
+  val connection = new OcppJsonClient("Test Charger", new URI("http://localhost:8080/ocppws")) {
 
     def onRequest(req: ChargePointReq): Future[ChargePointRes] = Future {
       req match {
