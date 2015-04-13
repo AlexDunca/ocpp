@@ -11,6 +11,7 @@ val json4sNative = "org.json4s" %% "json4s-native" % json4sV
 val json4sExt = "org.json4s" %% "json4s-ext" % json4sV
 val javaWebSocket = "org.java-websocket" % "Java-WebSocket" % "1.3.0"
 val slf4jApi = "org.slf4j" % "slf4j-api" % slf4jV
+val slf4jSimpleLogger = "org.slf4j" % "slf4j-simple" % slf4jV
 val dispatch = "net.databinder.dispatch" %% "dispatch-core" % dispatchV
 val scalax = "com.github.t3hnar" %% "scalax" % "2.5"
 val sprayHttp = "io.spray" %% "spray-http" % sprayV
@@ -59,6 +60,14 @@ val ocppSoap = module("ocpp-soap")
 val ocppSpray = module("ocpp-spray")
                   .dependsOn(ocppSoap)
                   .settings(libraryDependencies ++= List(sprayHttp, sprayHttpX, sprayExt))
+val exampleJsonClient = Project("example-json-client", file("example-json-client"))
+  .dependsOn(json)
+  .settings(
+    libraryDependencies ++= List(slf4jApi, slf4jSimpleLogger),
+    publish := {}
+  )
+
 
 enablePlugins(OssLibPlugin)
+
 publish := {}

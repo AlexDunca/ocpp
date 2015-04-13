@@ -9,15 +9,20 @@ import com.thenewmotion.ocpp.json.{OcppError, PayloadErrorCode, OcppException, O
 
 object JsonClientTestApp extends App {
 
-  private[this] val logger = LoggerFactory.getLogger(JsonClientTestApp.getClass)
+  private val chargerId = args.headOption.getOrElse("test-charger")
+  private val centralSystemUri = if (args.length >= 2) args(1) else "ws://localhost:8080/ocppws"
 
-  val connection = new OcppJsonClient("Test Charger", new URI("http://localhost:8080/ocppws")) {
+  private val logger = LoggerFactory.getLogger(JsonClientTestApp.getClass)
+
+  val connection = new OcppJsonClient(chargerId, new URI(centralSystemUri)) {
 
     def onRequest(req: ChargePointReq): Future[ChargePointRes] = Future {
       req match {
         case GetLocalListVersionReq =>
+          logger.info("Received GetLocalListVersionReq")
           GetLocalListVersionRes(AuthListNotSupported)
-        case _ =>
+        case x =>
+          logger.info(s"Received $x")
           throw OcppException(PayloadErrorCode.NotSupported, "Demo app doesn't support that")
       }
     }

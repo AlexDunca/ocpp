@@ -114,6 +114,6 @@ trait SimpleClientWebSocketComponent extends WebSocketComponent {
     def close() = client.closeBlocking()
 
     val connected = client.connectBlocking()
-    System.err.println(s"Created SimpleClientWebSocketConnection, connected = $connected")
+    logger.info(s"Created SimpleClientWebSocketConnection, connected = $connected")
   }
 }
